@@ -29,7 +29,7 @@ const ProfileModal = ({ user, children }) => {
           bg="blackAlpha.300"
           backdropFilter="blur(10px) hue-rotate(90deg)"
         />
-        <ModalContent h="410px">
+        <ModalContent>
           <ModalHeader
             fontSize="40px"
             fontFamily="Work sans"

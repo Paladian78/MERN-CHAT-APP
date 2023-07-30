@@ -11,6 +11,7 @@ import {
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ChatState } from "../../Context/ChatProvider";
 
 const Login = () => {
   const [show, setShow] = useState(false);
@@ -20,6 +21,7 @@ const Login = () => {
   const [picLoading, setPicLoading] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
+  const { setUser } = ChatState();
 
   const submitHandler = async () => {
     setPicLoading(true);
@@ -27,7 +29,7 @@ const Login = () => {
       toast({
         title: "Please Fill all the Feilds",
         status: "warning",
-        duration: 5000,
+        duration: 2000,
         isClosable: true,
         position: "bottom",
       });
@@ -53,10 +55,11 @@ const Login = () => {
       toast({
         title: "Login Successful",
         status: "success",
-        duration: 5000,
+        duration: 2000,
         isClosable: true,
         position: "bottom",
       });
+      setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setPicLoading(false);
       navigate("/chats");
@@ -65,7 +68,7 @@ const Login = () => {
         title: "Error Occured!",
         description: error.response.data.message,
         status: "error",
-        duration: 5000,
+        duration: 3000,
         isClosable: true,
         position: "bottom",
       });
