@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "start": "node backend/server",
-    "dev": "nodemon backend/server"
+    "dev": "nodemon backend/server",
+    "build": "npm install --legacy-peer-deps && cd frontend && npm install --legacy-peer-deps && npm run build && cd .."
   },
   "author": "Yogendar Singh",
   "license": "ISC",
