@@ -47,7 +47,6 @@ const MyChats = ({ fetchAgain }) => {
     setTimeout(() => {
       fetchChats();
     }, 1000);
-    // eslint-disable-next-line
   }, [fetchAgain]);
 
   return (
@@ -92,7 +91,7 @@ const MyChats = ({ fetchAgain }) => {
         borderRadius="lg"
         overflowY="hidden"
       >
-        {!chatLoading ? (
+        {chats ? (
           <Stack overflowY="scroll">
             {chats.map((chat) => (
               <Box
@@ -105,13 +104,13 @@ const MyChats = ({ fetchAgain }) => {
                 borderRadius="lg"
                 key={chat._id}
               >
-                <Text textAlign={"left"}>
+                <Text textAlign="left">
                   {!chat.isGroupChat
                     ? getSender(loggedUser, chat.users)
                     : chat.chatName}
                 </Text>
                 {chat.latestMessage && (
-                  <Text fontSize="xs">
+                  <Text fontSize="xs" textAlign="left">
                     <b>{chat.latestMessage.sender.name} : </b>
                     {chat.latestMessage.content.length > 50
                       ? chat.latestMessage.content.substring(0, 51) + "..."
