@@ -19,7 +19,8 @@ import { io } from "socket.io-client";
 import Lottie from "lottie-react";
 import animationData from "../animations/typing.json";
 
-const ENDPOINT = "https://mern-connect-appt.onrender.com";
+// const ENDPOINT = "https://mern-connect-appt.onrender.com";
+const ENDPOINT = "http://localhost:5000";
 var socket, selectedChatCompare;
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
