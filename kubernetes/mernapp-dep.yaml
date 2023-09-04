@@ -1,0 +1,29 @@
+# SOURCE: https://cloud.google.com/kubernetes-engine/docs/tutorials/guestbook
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mernapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mern-app
+  template:
+    metadata:
+      labels:
+        app: mern-app
+    spec:
+      containers:
+        - name: mern-app
+          image: paladian78/mern-chat-app
+          env:
+            - name: MONGO_URI
+              value: "mongodb://mongo.default.svc.cluster.local:27017"
+            - name: PORT
+              value: "5000"
+            - name: JWT_SECRET
+              value: "paladian"
+            - name: NODE_ENV
+              value: "production"
+          ports:
+            - containerPort: 5000
