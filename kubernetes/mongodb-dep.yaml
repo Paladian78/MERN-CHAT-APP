@@ -6,7 +6,7 @@ metadata:
   name: mongo
 spec:
   serviceName: mongo
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: mongo
@@ -24,10 +24,27 @@ spec:
           resources: {}
           volumeMounts:
             - mountPath: /data/db
-              name: mongo-claim0
+              name: mongo-claim
       restartPolicy: Always
       serviceAccountName: ""
       volumes:
-        - name: mongo-claim0
+        - name: mongo-claim
           persistentVolumeClaim:
-            claimName: mongo-claim0
+            claimName: mongo-claim
+  volumeClaimTemplates:
+    - metadata:
+        name: mongo-claim
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: mongo
+        resources:
+          requests:
+            storage: 1Gi
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: mongo
+provisioner: k8s.io/minikube-hostpath
+reclaimPolicy: Retain
+volumeBindingMode: Immediate
